@@ -4,16 +4,20 @@ package org.example.ordersservice.Services;
 import org.example.ordersservice.dto.OrderDetailsDto;
 import org.example.ordersservice.dto.OrderDto;
 import org.example.ordersservice.dto.ProductDto;
+import org.example.ordersservice.dto.UserDto;
 import org.example.ordersservice.entities.Order;
 import org.example.ordersservice.repository.OrderRepository;
 import org.example.ordersservice.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 public class OrderService {
 
+    @Autowired
+    private WebClient.Builder webClientBuilder;
 
     @Autowired
     private ModelMapper mapper;
@@ -28,9 +32,15 @@ public class OrderService {
     public OrderDetailsDto createOrder(OrderDto orderDto) {
 
         if(productRepository.findById(orderDto.getProduct_id()).isPresent()) {
-            return null;
-            /*Order order = mapper.map(orderDto, Order.class);
-            orderRepository.save(order);*/
+            if(getUserById(orderDto.getUser_id()) != null){
+                Order order = mapper.map(orderDto, Order.class);
+                order = orderRepository.save(order);
+
+                OrderDetailsDto orderDetailsDto = mapper.map(order, OrderDetailsDto.class);
+                orderDetailsDto.setProduct(mapper.map(productRepository.findById(orderDto.getProduct_id()).get(), ProductDto.class));
+                orderDetailsDto.setUser(getUserById(orderDto.getUser_id()));
+                return orderDetailsDto;
+            }
         }
 
 
@@ -42,12 +52,38 @@ public class OrderService {
                 .findById(id).map(o -> mapper.map(o, OrderDto.class))
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
-        OrderDetailsDto orderDetailsDto = mapper.map(order, OrderDetailsDto.class);
+        OrderDetailsDto orderDetailsDto = OrderDetailsDto.builder()
+                .id(id)
+                .createdAt(order.getCreatedAt())
+                .quantity(order.getQuantity())
+                .build();
 
         if(productRepository.findById(order.getProduct_id()).isPresent()) {
             orderDetailsDto.setProduct(mapper.map(productRepository.findById(order.getProduct_id()).get(), ProductDto.class));
         }
 
+        orderDetailsDto.setUser(getUserById(order.getUser_id()));
+        orderDetailsDto.getUser().setId(order.getUser_id());
+
         return orderDetailsDto;
+    }
+
+    public UserDto getUserById(Long id) {
+
+        String userServiceUrl = "http://localhost:8081/api/users/" + id;
+
+        UserDto user = webClientBuilder.build()
+                .get()
+                .uri(userServiceUrl)
+                .retrieve()
+                .bodyToMono(UserDto.class)
+                .block();
+
+        if(user == null) {
+            return null;
+        }
+        user.setId(id);
+
+        return user;
     }
 }

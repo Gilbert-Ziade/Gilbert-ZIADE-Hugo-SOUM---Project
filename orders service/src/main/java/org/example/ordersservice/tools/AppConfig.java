@@ -1,4 +1,4 @@
-package org.example.ordersservice.mappers;
+package org.example.ordersservice.tools;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
