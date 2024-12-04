@@ -1,5 +1,4 @@
 package org.example.userconfiguration.Controller;
-
 import org.example.userconfiguration.Services.UserService;
 import org.example.userconfiguration.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+
 public class UserController {
 
     @Autowired
@@ -25,6 +25,7 @@ public class UserController {
     }
 
     @PostMapping
+    @CrossOrigin(origins = "*")
     public UserDto createUser(@RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
