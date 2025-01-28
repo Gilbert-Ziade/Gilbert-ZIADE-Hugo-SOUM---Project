@@ -4,7 +4,7 @@ const OrderDisplayer = () => {
 
   return (
     <div>
-      <h3>Order</h3>
+      {/* <h3>Order</h3>
       <p>Order ID: {order.id}</p>
       <p>Order Date: {order.date}</p>
       <p>Order Items:</p>
@@ -14,7 +14,7 @@ const OrderDisplayer = () => {
             {item.name} - {item.price}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
