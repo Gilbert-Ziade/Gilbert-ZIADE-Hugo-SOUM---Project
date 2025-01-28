@@ -12,7 +12,7 @@ const SignUp = () => {
       { name: 'username', label: 'Username', type: 'text' },
       { name: 'email', label: 'Email', type: 'text' },
       { name: 'password', label: 'Mot de passe', type: 'password' },
-      { name: 'phone number', label: 'Numéro de téléphone', type: 'text' },
+      { name: 'phoneNumber', label: 'Numéro de téléphone', type: 'text' },
       { name: 'address', label: 'Adresse', type: 'text' },
 
     ];
@@ -26,7 +26,7 @@ const SignUp = () => {
               },
               body: JSON.stringify(formData),
             });
-      
+            console.log(formData)
             if (response.ok) {
               const userData = await response.json();
               setAuthState({
