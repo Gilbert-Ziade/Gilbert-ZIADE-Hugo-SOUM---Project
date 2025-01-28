@@ -1,12 +1,14 @@
 package org.example.ordersservice.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor
+@Getter
 public class Order {
 
     @Id

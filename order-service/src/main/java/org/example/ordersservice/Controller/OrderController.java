@@ -6,6 +6,8 @@ import org.example.ordersservice.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -22,6 +24,11 @@ public class OrderController {
     @GetMapping("/{id}")
     public OrderDetailsDto getOrderById(@PathVariable Long id) {
         return orderService.getOrderById(id);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<OrderDetailsDto> getAllOrdersByUserId(@PathVariable Long userId) {
+        return orderService.getOrdersByUserId(userId);
     }
 
 }
