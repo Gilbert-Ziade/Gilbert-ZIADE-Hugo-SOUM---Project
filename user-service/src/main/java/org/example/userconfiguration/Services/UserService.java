@@ -68,4 +68,11 @@ public class UserService {
         userRepository.save(user);
         return userDto;
     }
+
+
+    public UserDto loginUser(UserDto userDto) {
+        User user = userRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword()).orElseThrow(() -> new RuntimeException("User not found"));
+
+        return mapper.map(user, UserDto.class);
+    }
 }

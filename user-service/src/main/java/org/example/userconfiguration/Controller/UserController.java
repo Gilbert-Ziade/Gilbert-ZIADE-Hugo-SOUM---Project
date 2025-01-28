@@ -35,9 +35,14 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PostMapping("{id}")
+    @PostMapping("/{id}")
     public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
         return userService.updateUser(id, userDto);
+    }
+
+    @PostMapping("/login")
+    public UserDto loginUser(@RequestBody UserDto userDto) {
+        return userService.loginUser(userDto);
     }
 
 
