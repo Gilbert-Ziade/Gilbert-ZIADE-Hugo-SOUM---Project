@@ -41,6 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @CrossOrigin(origins = "*")
     public UserDto loginUser(@RequestBody UserDto userDto) {
         return userService.loginUser(userDto);
     }
