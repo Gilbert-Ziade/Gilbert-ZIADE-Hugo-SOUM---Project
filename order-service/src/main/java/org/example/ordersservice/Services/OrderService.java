@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class OrderService {
@@ -27,6 +28,9 @@ public class OrderService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Value("${USER_SERVICE_URL:http://localhost:8081}")
+    private String userServiceUrl;
 
 
     public OrderDetailsDto createOrder(OrderDto orderDto) {
@@ -70,11 +74,11 @@ public class OrderService {
 
     public UserDto getUserById(Long id) {
 
-        String userServiceUrl = "http://localhost:8081/api/users/" + id;
+        String url = userServiceUrl + "/api/users/" +  + id;
 
         UserDto user = webClientBuilder.build()
                 .get()
-                .uri(userServiceUrl)
+                .uri(url)
                 .retrieve()
                 .bodyToMono(UserDto.class)
                 .block();

@@ -7,7 +7,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    container_name: order-service
+    environment:
+      - USER_SERVICE_URL=http://user-service:8081
+    depends_on:
+      - user-service
 
   user-service:
     build:
@@ -16,3 +19,11 @@ services:
     ports:
       - "8081:8081"
     container_name: user-service
+
+  app:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    container_name: app

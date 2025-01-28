@@ -30,7 +30,7 @@ const renderFormField = (
     case 'number':
       return (
         <TextField
-          color="warning"
+          color="primary"
           key={index}
           name={field.name}
           label={field.label}
@@ -47,7 +47,7 @@ const renderFormField = (
         <FormControl key={index} variant="outlined" margin="normal" fullWidth>
           <InputLabel>{field.label}</InputLabel>
           <Select
-            color="warning"
+            color="primary"
             name={field.name}
             value={values[field.name] || ''}
             onChange={(e: SelectChangeEvent<HTMLInputElement>) => handleChange(e)}
@@ -64,7 +64,7 @@ const renderFormField = (
     case 'password':
       return (
         <TextField
-          color="warning"
+          color="primary"
           key={index}
           name={field.name}
           label={field.label}
@@ -99,7 +99,7 @@ const Form: React.FC<DynamicFormProps> = ({ formStructure, label, onSubmit }) =>
     className="flex flex-col space-y-4 backdrop-blur-sm bg-white/30 p-4 rounded-lg shadow-lg w-max"
     onSubmit={handleSubmit}>
       {formStructure.map((field, index) => renderFormField(field, index, handleChange, formValues))}
-      <Button type="submit" variant="contained" color="warning">
+      <Button type="submit" variant="contained" color="primary">
         {label}
       </Button>
     </form>
