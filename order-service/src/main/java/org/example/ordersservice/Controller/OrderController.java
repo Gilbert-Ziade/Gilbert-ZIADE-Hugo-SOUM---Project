@@ -16,16 +16,19 @@ public class OrderController {
     private OrderService orderService;
 
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public OrderDetailsDto createOrder(@RequestBody OrderDto orderDto) {
         return orderService.createOrder(orderDto);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public OrderDetailsDto getOrderById(@PathVariable Long id) {
         return orderService.getOrderById(id);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/user/{userId}")
     public List<OrderDetailsDto> getAllOrdersByUserId(@PathVariable Long userId) {
         return orderService.getOrdersByUserId(userId);
