@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.List;
+
 @Service
 public class OrderService {
 
@@ -70,6 +72,21 @@ public class OrderService {
         orderDetailsDto.getUser().setId(order.getUser_id());
 
         return orderDetailsDto;
+    }
+
+    public List<OrderDetailsDto> getOrdersByUserId(Long userId) {
+        List<Order> orders = orderRepository.findByUser_id(userId);
+
+        return orders
+                .stream()
+                .map(order -> {
+                    OrderDetailsDto orderDetailsDto = mapper.map(order, OrderDetailsDto.class);
+                    orderDetailsDto.setId(order.getId());
+                    orderDetailsDto.setProduct(mapper.map(productRepository.findById(order.getProduct_id()).get(), ProductDto.class));
+                    orderDetailsDto.setUser(null);
+                    return orderDetailsDto;
+                })
+                .toList();
     }
 
     public UserDto getUserById(Long id) {
