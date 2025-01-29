@@ -83,7 +83,7 @@ public class OrderService {
                     OrderDetailsDto orderDetailsDto = mapper.map(order, OrderDetailsDto.class);
                     orderDetailsDto.setId(order.getId());
                     orderDetailsDto.setProduct(mapper.map(productRepository.findById(order.getProduct_id()).get(), ProductDto.class));
-                    orderDetailsDto.setUser(null);
+                    orderDetailsDto.setUser(getUserById(order.getUser_id()));
                     return orderDetailsDto;
                 })
                 .toList();
