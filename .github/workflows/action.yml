@@ -27,9 +27,9 @@ jobs:
       - name: Build and Push Front-End Docker Image
         working-directory: front-end
         run: |
-          docker build -t your-dockerhub-username/vite-app .
+          docker build -t hugosoum/vite-app .
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker push your-dockerhub-username/vite-app
+          docker push hugosoum/vite-app
 
   # User-Service Job
   user-service:
@@ -45,9 +45,9 @@ jobs:
       - name: Build and Push User-Service Docker Image
         working-directory: user-service
         run: |
-          docker build -t your-dockerhub-username/user-service .
+          docker build -t hugosoum/user-service .
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker push your-dockerhub-username/user-service
+          docker push hugosoum/user-service
 
   # Order-Service Job
   order-service:
@@ -63,6 +63,6 @@ jobs:
       - name: Build and Push Order-Service Docker Image
         working-directory: order-service
         run: |
-          docker build -t your-dockerhub-username/order-service .
+          docker build -t hugosoum/order-service .
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker push your-dockerhub-username/order-service
+          docker push hugosoum/order-service
