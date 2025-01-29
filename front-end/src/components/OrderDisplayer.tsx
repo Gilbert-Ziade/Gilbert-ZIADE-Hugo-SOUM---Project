@@ -39,8 +39,8 @@ const OrderDisplayer = (props: OrderDisplayerProps) => {
         ))}
     </div>
     </div>
-
   );
 };
+
 
 export default OrderDisplayer;
