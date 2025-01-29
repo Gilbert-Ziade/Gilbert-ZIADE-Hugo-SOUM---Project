@@ -26,6 +26,7 @@ const SignIn = () => {
             console.log(formData)
             if (response.ok) {
               const userData = await response.json();
+              console.log(userData);
               setAuthState({
                 isAuthenticated: true,
                 user: userData,

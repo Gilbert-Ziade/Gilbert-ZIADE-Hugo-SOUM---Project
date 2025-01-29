@@ -1,22 +1,50 @@
+import { Card, Typography } from "@mui/material";
 
+export interface Product {
+    id: number;
+    productName: string;
+    unitPrice: number;
+}
+export interface Order {
+    id: number;
+    date: string;
+    quantity: number;
+    product: Product;
+}
+export interface OrderDisplayerProps {
+    orders: Order[]
+}
 
-const OrderDisplayer = () => {
-
+const OrderDisplayer = (props: OrderDisplayerProps) => {
+    const { orders } = props;
   return (
     <div>
-      {/* <h3>Order</h3>
-      <p>Order ID: {order.id}</p>
-      <p>Order Date: {order.date}</p>
-      <p>Order Items:</p>
-      <ul>
-        {order.items.map((item, index) => (
-          <li key={index}>
-            {item.name} - {item.price}
-          </li>
+        <Typography variant="h1">Order</Typography>
+
+    <div style={StyleSheet.orderContainer}>
+        {orders.map((order, index) => (
+            <Card key={index}>
+                <Typography variant="h2">Order n°{order.id}</Typography>
+                <Typography variant="body1">{order.date}</Typography>
+                <Typography variant="body1">Quantity: {order.quantity}</Typography>
+                <Typography variant="body1">Product: {order.product.productName}</Typography>
+                <Typography variant="body1">Unit Price: {order.product.unitPrice}</Typography>
+            </Card>
         ))}
-      </ul> */}
     </div>
+    </div>
+
   );
 };
+
+const StyleSheet = {
+    orderContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: '1rem',
+        gap: '1rem',
+    }
+}
 
 export default OrderDisplayer;
