@@ -16,7 +16,7 @@ const SignIn = () => {
   
         const handleFormSubmit = async (formData: { [key: string]: any }) => {
           try {
-            const response = await fetch('http://myapp.local:5000/users/api/users/login', {
+            const response = await fetch('http://myapp.local/users/api/users/login', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
