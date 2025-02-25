@@ -12,7 +12,7 @@ const HomePage = () => {
     const fetchOrder = async () => {
         if(user) {
         try{
-            const response = await fetch(`http://myapp.local/orders/api/orders/user/${user.id}`, {
+            const response = await fetch(`http://myapp.local:5001/orders/api/orders/user/${user.id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

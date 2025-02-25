@@ -13,13 +13,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ingress-user-service
+                name: user-service-service
                 port:
                   number: 5000
           - path: /orders
             pathType: Prefix
             backend:
               service:
-                name: ingress-order-service
+                name: order-service-service
                 port:
                   number: 5001
