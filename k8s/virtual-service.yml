@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: order-service
+  name: routing
 spec:
   hosts:
     - "*"
@@ -16,17 +16,6 @@ spec:
             host: order-service-service.default.svc.cluster.local
             port:
               number: 8080
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: user-service
-spec:
-  hosts:
-    - "*"
-  gateways:
-    - front-end-gateway
-  http:
     - match:
         - uri:
             prefix: "/api/users"
@@ -35,3 +24,11 @@ spec:
             host: user-service-service.default.svc.cluster.local
             port:
               number: 8080
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: front-end-service.default.svc.cluster.local
+            port:
+              number: 80
