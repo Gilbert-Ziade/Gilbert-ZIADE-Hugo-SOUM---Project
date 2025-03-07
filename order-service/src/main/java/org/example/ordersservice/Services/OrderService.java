@@ -31,7 +31,7 @@ public class OrderService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Value("${USER_SERVICE_URL:http://localhost:8080/users}")
+    @Value("${USER_SERVICE_URL:http://localhost:8081/users}")
     private String userServiceUrl;
 
 
