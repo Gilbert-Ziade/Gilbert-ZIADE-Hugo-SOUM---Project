@@ -93,7 +93,7 @@ public class OrderService {
 
     public UserDto getUserById(Long id) {
 
-        String url = userServiceUrl  + "/" + id;
+        String url = userServiceUrl  +  id;
 
 
         UserDto user = webClientBuilder.build()
