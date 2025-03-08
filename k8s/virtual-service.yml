@@ -11,6 +11,8 @@ spec:
     - match:
         - uri:
             prefix: "/api/orders"
+      rewrite:
+        uri: "/orders"
       route:
         - destination:
             host: order-service-service.default.svc.cluster.local
@@ -19,6 +21,8 @@ spec:
     - match:
         - uri:
             prefix: "/api/users"
+      rewrite:
+        uri: "/users"
       route:
         - destination:
             host: user-service-service.default.svc.cluster.local
@@ -31,4 +35,5 @@ spec:
         - destination:
             host: front-end-service.default.svc.cluster.local
             port:
-              number: 80
+              number: 81
+

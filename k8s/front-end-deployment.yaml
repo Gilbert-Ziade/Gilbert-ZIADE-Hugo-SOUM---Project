@@ -16,7 +16,7 @@ spec:
         - name: front-end
           image: hugosoum/vite-app:latest
           ports:
-            - containerPort: 80
+            - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
@@ -27,6 +27,6 @@ spec:
     app: front-end
   ports:
     - protocol: TCP
-      port: 80
+      port: 81
       targetPort: 80
   type: LoadBalancer
