@@ -31,7 +31,7 @@ public class OrderService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Value("${USER_SERVICE_URL:http://localhost/api/users}")
+    @Value("${services.users.url}")
     private String userServiceUrl;
 
 
@@ -77,6 +77,8 @@ public class OrderService {
     public List<OrderDetailsDto> getOrdersByUserId(Long userId) {
         List<Order> orders = orderRepository.findByUser_id(userId);
 
+        System.out.println("url:" + userServiceUrl);
+
         return orders
                 .stream()
                 .map(order -> {
@@ -91,7 +93,8 @@ public class OrderService {
 
     public UserDto getUserById(Long id) {
 
-        String url = userServiceUrl  + id;
+        String url = userServiceUrl  + "/" + id;
+
 
         UserDto user = webClientBuilder.build()
                 .get()
