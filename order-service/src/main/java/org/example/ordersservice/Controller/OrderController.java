@@ -34,4 +34,10 @@ public class OrderController {
         return orderService.getOrdersByUserId(userId);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/error")
+    public String error() {
+        return "You are on the order service error page";
+    }
+
 }
